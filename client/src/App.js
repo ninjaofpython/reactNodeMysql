@@ -3,43 +3,56 @@ import { useState } from "react";
 import Axios from 'axios';
 
 function App() {
+  const [dateSearched, setDateSearched] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [email, setEmail] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [url, setUrl] = useState('');
+  const [phone, setPhone] = useState('');
+  const [jobSearchSiteId, setJobSearchSiteId] = useState(0);
+  const [outComeId, setOutComeId] = useState(0);
+  const [jobList, setJobList] = useState([]);
 
-  const [name, setName] = useState('');
-  const [age, setAge] = useState(0);
-  const [country, setCountry] = useState('');
-  const [position, setPosition] = useState('');
-  const [wage, setWage] = useState(0);
-  const [employeeList, setEmployeeList] = useState([]);
-
-  const addEmployee = () => {
+  const addJob = () => {
     Axios.post('http://localhost:3001/create', {
-      name: name,
-      age: age,
-      country: country,
-      position: position,
-      wage: wage
+      dateSearched: dateSearched,
+      jobTitle: jobTitle,
+      email: email,
+      companyName: companyName,
+      url: url,
+      phone: phone,
+      jobSearchSiteId: jobSearchSiteId,
+      outComeId: outComeId,
+      jobList: jobList
     }).then(() => {
-      setEmployeeList([...employeeList, {
-        name: name,
-        age: age,
-        country: country,
-        position: position,
-        wage: wage,
+      setJobList([...jobList, {
+        dateSearched: dateSearched,
+        jobTitle: jobTitle,
+        email: email,
+        companyName: companyName,
+        url: url,
+        phone: phone,
+        jobSearchSiteId: jobSearchSiteId,
+        outComeId: outComeId
       },
       ])
     })
   }
 
-  const getEmployees = () => {
-    Axios.get('http://localhost:3001/employees').then((response) => {
-      setEmployeeList(response.data)
+  const getJobs = () => {
+    Axios.get('http://localhost:3001/jobs').then((response) => {
+      setJobList(response.data)
     })
 
   }
 
   return (
     <div className="App">
-      <div className="information">
+      <div className="job_information">
+        <label>Date Searched:</label>
+        <input type="text" onChange={(event) => {
+          setDateSearched(event.target.value)
+        }} />
         <label>Job Title:</label>
         <input type="text" onChange={(event) => {
           setJobTitle(event.target.value);
@@ -48,29 +61,40 @@ function App() {
         <input type="text" onChange={(event) => {
           setEmail(event.target.value);
         }} />
-        <label>Job URL:</label>
+        <label>Company Name:</label>
         <input type="text" onChange={(event) => {
-          setJobUrl(event.target.value);
+          setCompanyName(event.target.value);
         }} />
-        <label>Postion:</label>
+        <label>URL:</label>
         <input type="text" onChange={(event) => {
-          setPosition(event.target.value);
+          setUrl(event.target.value);
         }} />
-        <label>Wage (year):</label>
+        <label>Phone:</label>
+        <input type="text" onChange={(event) => {
+          setPhone(event.target.value)
+        }} />
+        <label>Job Seach Site ID: e.g. Craigslist '1', Monster '2', </label>
         <input type="number" onChange={(event) => {
-          setWage(event.target.value)
+          setJobSearchSiteId(event.target.value)
         }} />
-        <button onClick={addEmployee}>Add Employee</button>
+        <label>Outcome ID:</label>
+        <input type="number" onChange={(event) => {
+          setOutComeId(event.target.value)
+        }} />
+        <button onClick={addJob}>Add Job</button>
       </div>
-      <div className="employees">
-        <button onClick={getEmployees}>Show Employees</button>
-        {employeeList.map((val, key) => {
-          return <div className="employee">
-            <h3>Name: {val.name}</h3>
-            <h3>Age: {val.age}</h3>
-            <h3>Country: {val.country}</h3>
-            <h3>Position: {val.position}</h3>
-            <h3>Wage: {val.wage}</h3>
+      <div className="jobs">
+        <button onClick={getJobs}>Show Jobs</button>
+        {jobList.map((val, key) => {
+          return <div className="job">
+            <h3>Date Searched: {val.dateSearched}</h3>
+            <h3>Job Title: {val.jobTitle}</h3>
+            <h3>Email: {val.email}</h3>
+            <h3>Company Name: {val.companyName}</h3>
+            <h3>URL: {val.url}</h3>
+            <h3>Phone: {val.phone}</h3>
+            <h3>Job Search Site ID: {val.jobSearchSiteId}</h3>
+            <h3>Outcome ID: {val.outComeId}</h3>
           </div>
         })}
       </div>
