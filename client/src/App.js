@@ -10,7 +10,8 @@ function App() {
   const [url, setUrl] = useState('');
   const [phone, setPhone] = useState('');
   const [jobSearchSiteId, setJobSearchSiteId] = useState(0);
-  const [outComeId, setOutComeId] = useState(0);
+  const [outcomeId, setOutcomeId] = useState(0);
+  const [reportToEddId, setReportToEddId] = useState(0);
   const [jobList, setJobList] = useState([]);
 
   const addJob = () => {
@@ -22,7 +23,8 @@ function App() {
       url: url,
       phone: phone,
       jobSearchSiteId: jobSearchSiteId,
-      outComeId: outComeId,
+      outcomeId: outcomeId,
+      reportToEddId: reportToEddId,
       jobList: jobList
     }).then(() => {
       setJobList([...jobList, {
@@ -33,7 +35,8 @@ function App() {
         url: url,
         phone: phone,
         jobSearchSiteId: jobSearchSiteId,
-        outComeId: outComeId
+        outcomeId: outcomeId,
+        reportToEddId: reportToEddId
       },
       ])
     })
@@ -73,13 +76,17 @@ function App() {
         <input type="text" onChange={(event) => {
           setPhone(event.target.value)
         }} />
-        <label>Job Seach Site ID: e.g. Craigslist '1', Monster '2', </label>
+        <label>Job Seach Site ID: e.g. Craigslist '1', Calijobs '2', </label>
         <input type="number" onChange={(event) => {
           setJobSearchSiteId(event.target.value)
         }} />
         <label>Outcome ID:</label>
         <input type="number" onChange={(event) => {
-          setOutComeId(event.target.value)
+          setOutcomeId(event.target.value)
+        }} />
+        <label>Report to Edd: Yes '1' No '2'</label>
+        <input type="number" onChange={(event) => {
+          setReportToEddId(event.target.value)
         }} />
         <button onClick={addJob}>Add Job</button>
       </div>
@@ -94,7 +101,7 @@ function App() {
             <h3>URL: {val.url}</h3>
             <h3>Phone: {val.phone}</h3>
             <h3>Job Search Site ID: {val.jobSearchSiteId}</h3>
-            <h3>Outcome ID: {val.outComeId}</h3>
+            <h3>Outcome ID: {val.outcomeId}</h3>
           </div>
         })}
       </div>

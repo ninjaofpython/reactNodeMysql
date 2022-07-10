@@ -1,11 +1,76 @@
-CREATE TABLE employees_table (
+CREATE TABLE jobSearchTable(
     id int NOT NULL AUTO_INCREMENT,
-    name text(255) NOT NULL,
-    age int NOT NULL,
-    country text(255) NOT NULL,
-    position text(255) NOT NULL,
-    wage int NOT NULL,
-    PRIMARY KEY (id)
-
+    dateSearched text(255) NOT NULL,
+    jobTitle text(255) NOT NULL,
+    email text(255),
+    companyName text(255),
+    url text(255),
+    phone text(255), 
+    jobSearchSiteId int NOT NULL,
+    outcomeId int NOT NULL,   
+    PRIMARY KEY (id),
+    FOREIGN KEY (jobSearchSiteId) REFERENCES jobSearchSiteTable(id),
+    FOREIGN KEY (outcomeId) REFERENCES outcomeTable(id)
 );
 
+
+CREATE TABLE jobSearchSiteTable (
+    id int NOT NULL AUTO_INCREMENT,
+    domain text(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE outcomeTable (
+    id int NOT NULL AUTO_INCREMENT,
+    type text(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE reportToEdd (
+    id int NOT NULL AUTO_INCREMENT,
+    result text(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+ALTER TABLE jobSearchTable 
+ADD FOREIGN KEY (reportToEddId)
+REFERENCES reportToEddTable(id);
+
+
+UPDATE jobSearchTable
+SET
+    reportToEddId = 1
+WHERE
+    id = 4;
+
+
+ALTER USER 'root' @ 'localhost' IDENTIFIED BY 'EU2lZcaGtQ9^4y0ZC16';
+
+SET PASSWORD FOR root@localhost = OLD_PASSWORD('EU2lZcaGtQ9^4y0ZC16');
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'EU2lZcaGtQ9^4y0ZC16';
+
+INSERT INTO jobSearchSiteTable (id, domain) VALUES (1, 'craigslist.org');
+
+INSERT INTO jobSearchSiteTable (id, domain) VALUES (2, 'calijobs.ca.gov');
+
+INSERT INTO outcomeTable (id, type) VALUES (1, 'Awaiting reply');
+
+INSERT INTO reportToEdd(id, result) VALUES (1, 'YES');
+INSERT INTO reportToEdd(id, result) VALUES (2, 'NO');
+
+
+INSERT INTO outcomeTable(id, type) VALUES (2, 'Responded');
+
+
+ALTER TABLE jobSearchTable ADD COLUMN reportToEddId INT;
+
+RENAME TABLE reportToEdd to reportToEddTable;
+
+
+ 

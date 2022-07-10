@@ -7,22 +7,26 @@ app.use(cors())
 app.use(express.json())
 
 // Database connection info
-
 const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: '******',
-    database: 'employees'
+    password: '*******',
+    database: 'job_search'
 })
 
 app.post('/create', (req, res) => {
-    const name = req.body.name
-    const age = req.body.age
-    const country = req.body.country
-    const position = req.body.position
-    const wage = req.body.wage
+    const dateSearched = req.body.dateSearched
+    const jobTitle = req.body.jobTitle
+    const email = req.body.email
+    const companyName = req.body.companyName
+    const url = req.body.url
+    const phone = req.body.phone
+    const jobSearchSiteId = req.body.jobSearchSiteId
+    const outcomeId = req.body.outcomeId
+    const reportToEddId = req.body.reportToEddId
+    
 
-    db.query('insert into employees_table (name, age, country, position, wage) VALUES (?, ?, ?, ?, ?)', [name, age, country, position, wage], (err, result) => {
+    db.query('insert into jobSearchTable (dateSearched, jobTitle, email, companyName, url, phone, jobSearchSiteId, outComeId, reportToEddId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [dateSearched, jobTitle, email, companyName, url, phone, jobSearchSiteId, outcomeId, reportToEddId], (err, result) => {
         if (err) {
             console.log(err)
         } else {
@@ -31,8 +35,8 @@ app.post('/create', (req, res) => {
     })
 })
 
-app.get('/employees', (req, res) => {
-    db.query("SELECT * FROM employees_table", (err, result) => {
+app.get('/job_search', (req, res) => {
+    db.query("SELECT * FROM job_search_table", (err, result) => {
         if (err) {
             console.log(err)
         } else {
