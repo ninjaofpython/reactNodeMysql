@@ -10,7 +10,7 @@ app.use(express.json())
 const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: '*******',
+    password: '********',
     database: 'job_search'
 })
 
@@ -36,7 +36,7 @@ app.post('/create', (req, res) => {
 })
 
 app.get('/job_search', (req, res) => {
-    db.query("SELECT * FROM job_search_table", (err, result) => {
+    db.query("SELECT * FROM jobSearchTable", (err, result) => {
         if (err) {
             console.log(err)
         } else {

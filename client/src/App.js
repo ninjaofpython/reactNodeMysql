@@ -53,7 +53,7 @@ function App() {
     <div className="App">
       <div className="job_information">
         <label>Date Searched:</label>
-        <input type="text" onChange={(event) => {
+        <input type={"date"} onChange={(event) => {
           setDateSearched(event.target.value)
         }} />
         <label>Job Title:</label>
