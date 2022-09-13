@@ -7,9 +7,12 @@ function App() {
   const [jobTitle, setJobTitle] = useState('');
   const [email, setEmail] = useState('');
   const [companyName, setCompanyName] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
+  const [personContacted, setPersonContacted] = useState('');
   const [url, setUrl] = useState('');
   const [phone, setPhone] = useState('');
   const [jobSearchSiteId, setJobSearchSiteId] = useState(0);
+  const [typeOfWorkApplied, setTypeOfWorkApplied] = useState('');
   const [outcomeId, setOutcomeId] = useState(0);
   const [reportToEddId, setReportToEddId] = useState(0);
   const [jobList, setJobList] = useState([]);
@@ -20,9 +23,12 @@ function App() {
       jobTitle: jobTitle,
       email: email,
       companyName: companyName,
+      companyAddress: companyAddress,
+      personContacted: personContacted,
       url: url,
       phone: phone,
       jobSearchSiteId: jobSearchSiteId,
+      typeOfWorkApplied: typeOfWorkApplied,
       outcomeId: outcomeId,
       reportToEddId: reportToEddId,
       jobList: jobList
@@ -32,9 +38,12 @@ function App() {
         jobTitle: jobTitle,
         email: email,
         companyName: companyName,
+        companyAddress: companyAddress,
+        personContacted: personContacted,
         url: url,
         phone: phone,
         jobSearchSiteId: jobSearchSiteId,
+        typeOfWorkApplied: typeOfWorkApplied,
         outcomeId: outcomeId,
         reportToEddId: reportToEddId
       },
@@ -68,6 +77,14 @@ function App() {
         <input type="text" onChange={(event) => {
           setCompanyName(event.target.value);
         }} />
+        <label>Company Address:</label>
+        <input type="text" onChange={(event) => {
+          setCompanyAddress(event.target.value);
+        }} />
+        <label>Person Contacted</label>
+        <input type="text" onChange={(event) => {
+          setPersonContacted(event.target.value);
+        }} />
         <label>URL:</label>
         <input type="text" onChange={(event) => {
           setUrl(event.target.value);
@@ -76,11 +93,15 @@ function App() {
         <input type="text" onChange={(event) => {
           setPhone(event.target.value)
         }} />
-        <label>Job Seach Site ID: e.g. Craigslist '1', Calijobs '2', </label>
+        <label>Job Seach Site ID: e.g. Craigslist '1', Calijobs '2', Calijob Dept '3', Indeed.com '4' </label>
         <input type="number" onChange={(event) => {
           setJobSearchSiteId(event.target.value)
         }} />
-        <label>Outcome ID:</label>
+        <label>Type of Work Applied For 'IT'</label>
+        <input type="text" onChange={(event) => {
+          setTypeOfWorkApplied(event.target.value)
+        }} />
+        <label>Outcome ID: e.g. Awaiting Reply '1', Responsed '2', Interview '3', Denied Interview '4'</label>
         <input type="number" onChange={(event) => {
           setOutcomeId(event.target.value)
         }} />
@@ -98,9 +119,12 @@ function App() {
             <h3>Job Title: {val.jobTitle}</h3>
             <h3>Email: {val.email}</h3>
             <h3>Company Name: {val.companyName}</h3>
+            <h3>Company Address: {val.companyAddress}</h3>
+            <h3>Person Contacted: {val.personContacted}</h3>
             <h3>URL: {val.url}</h3>
             <h3>Phone: {val.phone}</h3>
             <h3>Job Search Site ID: {val.jobSearchSiteId}</h3>
+            <h3>Type of work applied for: {val.typeOfWorkApplied}</h3>
             <h3>Outcome ID: {val.outcomeId}</h3>
           </div>
         })}

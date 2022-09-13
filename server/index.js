@@ -10,7 +10,7 @@ app.use(express.json())
 const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: '********',
+    password: '*******',
     database: 'job_search'
 })
 
@@ -19,14 +19,17 @@ app.post('/create', (req, res) => {
     const jobTitle = req.body.jobTitle
     const email = req.body.email
     const companyName = req.body.companyName
+    const companyAddress = req.body.companyAddress
+    const personContacted = req.body.personContacted
     const url = req.body.url
     const phone = req.body.phone
     const jobSearchSiteId = req.body.jobSearchSiteId
+    const typeOfWorkApplied = req.body.typeOfWorkApplied
     const outcomeId = req.body.outcomeId
     const reportToEddId = req.body.reportToEddId
     
 
-    db.query('insert into jobSearchTable (dateSearched, jobTitle, email, companyName, url, phone, jobSearchSiteId, outComeId, reportToEddId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [dateSearched, jobTitle, email, companyName, url, phone, jobSearchSiteId, outcomeId, reportToEddId], (err, result) => {
+    db.query('insert into jobSearchTable (dateSearched, jobTitle, email, companyName, companyAddress, personContacted, url, phone, jobSearchSiteId, typeOfWorkApplied, outComeId, reportToEddId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [dateSearched, jobTitle, email, companyName, companyAddress, personContacted, url, phone, jobSearchSiteId, typeOfWorkApplied, outcomeId, reportToEddId], (err, result) => {
         if (err) {
             console.log(err)
         } else {
